@@ -3,6 +3,8 @@ module DDMTransfection
 using Images
 using SparseArrays
 using StatsBase
+using Chain
+using DDMFramework
 
 
 
@@ -112,7 +114,18 @@ function drop_empty_dims(image)
     dropdims(img.data.data;dims)
 end
 
-MultiPointAnalysis("Transfection") do image, config
+function keyfun(data)::Tuple{Float64}
+    x = data["image"].Pixels[:Plane][1][:PositionX]
+    y = data["image"].Pixels[:Plane][1][:PositionY]
+    return (x,y)
+end
+
+function keytest(kleft::Tuple{Float64}, kright::Tuple{Float64})
+    atol = 1.2
+    isapprox.(kleft,kright;atol) |> all
+end
+
+DDMFramework.multipoint("Transfection", keyfun; keytest) do image, config
     
     image = drop_empty_dims(image)
     
@@ -128,7 +141,7 @@ MultiPointAnalysis("Transfection") do image, config
     
 end
 
-MultiPointAnalysis("BackgroundStats") do image, config
+DDMFramework.multipoint("BackgroundStats", keyfun; keytest) do image, config
     
     image = drop_empty_dims(image)
     
@@ -143,4 +156,6 @@ MultiPointAnalysis("BackgroundStats") do image, config
     end |> DataFrame
 
     
+end
+
 end
