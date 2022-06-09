@@ -3,5 +3,5 @@
 *.jl.mem
 *.ipynb_checkpoints
 /dev
-/Manifest.toml
+# /Manifest.toml
 /docs/build/
