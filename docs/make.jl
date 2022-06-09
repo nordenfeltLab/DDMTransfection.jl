@@ -11,12 +11,14 @@ makedocs(;
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://nordenfeltLab.github.io/DDMTransfection.jl",
-        assets=String["assets/html/DDMMigration.html"],
+        assets=String[],
     ),
     pages=[
         "Home" => "index.md",
     ],
 )
+
+cp("static", "build/")
 
 deploydocs(;
     repo="github.com/nordenfeltLab/DDMTransfection.jl",
