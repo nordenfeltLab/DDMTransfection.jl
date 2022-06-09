@@ -46,6 +46,8 @@ jobs:
         with:
           version: '1.7'
       - uses: julia-actions/julia-buildpkg@v1
+      - run: |
+          julia --color=yes --code-coverage -e 'using Pkg; Pkg.add(url="https://github.com/ahnlabb/DDMFramework.jl.git")'
       - uses: julia-actions/julia-docdeploy@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
