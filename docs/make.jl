@@ -11,7 +11,7 @@ makedocs(;
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://nordenfeltLab.github.io/DDMTransfection.jl",
-        assets=String[],
+        assets=String["assets/html/DDMMigration.html"],
     ),
     pages=[
         "Home" => "index.md",
