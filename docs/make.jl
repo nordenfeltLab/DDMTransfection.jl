@@ -18,7 +18,7 @@ makedocs(;
     ],
 )
 
-cp("static", "build/dev/")
+cp("static", "build/assets/")
 
 deploydocs(;
     repo="github.com/nordenfeltLab/DDMTransfection.jl",
